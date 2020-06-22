@@ -1,0 +1,51 @@
+.Note {
+  display: flex;
+  align-items: center;
+  width: 60%;
+  margin-left: var(--main-margin-left);
+  margin-bottom: 1em;
+  padding: 0.75em;
+  border: solid 1px;
+  border-radius: var(--border-radius);
+}
+
+.Note span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid 2px green;
+  height: 16px;
+  width: 16px;
+  border-radius: 100%;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.Note span i {
+  color: rgb(2, 134, 2);
+  font-size: 1.5em;
+}
+.EditNote {
+  color: grey;
+  padding-right: 0.25em;
+}
+.DeleteNote {
+  color: #dc4c3f;
+}
+
+.Note div {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.High {
+  border-color: var(--high-priority-color);
+}
+.Medium {
+  border-color: var(--medium-priority-color);
+}
+
+.Low {
+  border-color: var(--low-priority-color);
+}

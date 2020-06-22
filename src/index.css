@@ -5,9 +5,20 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: 'Open Sans', source-code-pro, Menlo, Monaco, Consolas,
+    'Courier New', monospace;
+}
+
+:root {
+  --header-height: 100px;
+  --border-radius: 0.35em;
+  --no-priority-color: #b6b5b5;
+  --high-priority-color: red;
+  --medium-priority-color: orange;
+  --low-priority-color: green;
+  --main-margin-left: 2em;
 }
