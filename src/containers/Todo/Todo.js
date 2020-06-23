@@ -3,7 +3,7 @@ import Notes from '../../components/Notes/Notes';
 import classes from './Todo.module.css';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import Modal from '../../components/UI/Modal/Modal';
-
+import NoteForm from '../../components/Notes/NoteForm/NoteForm';
 class Todo extends Component {
   state = {
     notes: {
@@ -64,10 +64,9 @@ class Todo extends Component {
   render() {
     return (
       <div className={classes.Content}>
-        <Modal
-          show={this.state.adding}
-          modalClosed={this.addingCancelHandler}
-        ></Modal>
+        <Modal show={this.state.adding} modalClosed={this.addingCancelHandler}>
+          <NoteForm />
+        </Modal>
         <Sidebar />
         <Notes
           addNoteClicked={this.addingHandler}
