@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from './Note.module.css';
+
 const note = (props) => {
   const mi = 'material-icons';
   const wrapperClasses = [classes.Note, classes.Medium];
@@ -15,7 +16,12 @@ const note = (props) => {
       <p>{props.title}</p>
       <div>
         <i className={editNote.join(' ')}>edit</i>
-        <i className={deleteNote.join(' ')}>delete_forever</i>
+        <i
+          onClick={() => props.deleteClicked(props.project, props.id)}
+          className={deleteNote.join(' ')}
+        >
+          delete_forever
+        </i>
       </div>
     </div>
   );

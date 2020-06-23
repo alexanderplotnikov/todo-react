@@ -1,0 +1,19 @@
+.Button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font: inherit;
+  color: inherit;
+}
+.Button:hover {
+  color: #dc4c3f;
+}
+.Button:first-of-type {
+  margin-left: 0;
+  padding-left: 0;
+}

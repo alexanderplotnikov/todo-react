@@ -1,8 +1,10 @@
 .Notes {
   min-height: calc(100vh - var(--toolbar-height));
-  /* height: 100vh; */
-  border: 1px solid black;
   padding: 1em 0;
   flex-grow: 1;
-  box-sizing: border-box;
+}
+
+.Notes > div {
+  max-height: 80%;
+  overflow: scroll;
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import Note from './Note/Note';
 import classes from './Notes.module.css';
+import Button from '../UI/Button/Button';
 
 const notes = (props) => {
   let notes = Object.keys(props.notes).map((nKey) => {
@@ -12,6 +13,7 @@ const notes = (props) => {
             title={note.title}
             complete={note.complete}
             completeClicked={props.toggleCheck}
+            deleteClicked={props.deleteNoteClicked}
             project={nKey}
             id={i}
           />
@@ -22,8 +24,10 @@ const notes = (props) => {
 
   return (
     <div className={classes.Notes}>
-      {notes}
-      <button>Add Note</button>
+      <div>{notes}</div>
+      <Button clicked={props.addNoteClicked} btnType="add">
+        Add Note
+      </Button>
     </div>
   );
 };

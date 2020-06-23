@@ -36,7 +36,7 @@ class Todo extends Component {
     projects: {
       title: 'School',
     },
-    adding: true,
+    adding: false,
   };
   toggleCheckHandler = (proj, note) => {
     const updatedNote = {
@@ -51,6 +51,16 @@ class Todo extends Component {
   addingCancelHandler = () => {
     this.setState({ adding: false });
   };
+  addingHandler = () => {
+    this.setState({ adding: true });
+  };
+  deleteNoteHandler = (proj, index) => {
+    const updatedNote = {
+      ...this.state.notes,
+    };
+    updatedNote[proj].splice(index, 1);
+    this.setState({ notes: updatedNote });
+  };
   render() {
     return (
       <div className={classes.Content}>
@@ -59,7 +69,12 @@ class Todo extends Component {
           modalClosed={this.addingCancelHandler}
         ></Modal>
         <Sidebar />
-        <Notes notes={this.state.notes} toggleCheck={this.toggleCheckHandler} />
+        <Notes
+          addNoteClicked={this.addingHandler}
+          deleteNoteClicked={this.deleteNoteHandler}
+          notes={this.state.notes}
+          toggleCheck={this.toggleCheckHandler}
+        />
       </div>
     );
   }

@@ -1,13 +1,11 @@
 import React from 'react';
 import classes from './Sidebar.module.css';
+import Button from '../UI/Button/Button';
 
 const sidebar = (props) => (
   <div className={classes.Sidebar}>
     <ul>List Projects</ul>
-    <div>
-      <i className="material-icons">add</i>
-      <p>Add project</p>
-    </div>
+    <Button btnType="add">Add project</Button>
     <input type="text" />
   </div>
 );

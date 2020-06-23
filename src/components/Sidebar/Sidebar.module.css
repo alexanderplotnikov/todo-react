@@ -11,6 +11,8 @@
   scrollbar-width: none;
   max-height: 30em;
   padding: 1em 0;
+  border-bottom: solid 1px var(--no-priority-color);
+  margin-bottom: 1em;
 }
 .Sidebar ul::-webkit-scrollbar {
   display: none;
