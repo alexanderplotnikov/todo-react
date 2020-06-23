@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Notes from '../../components/Notes/Notes';
-import Aux from '../../hoc/Aux/Aux';
-
+import classes from './Todo.module.css';
+import Sidebar from '../../components/Sidebar/Sidebar';
 class Todo extends Component {
   state = {
     notes: {
@@ -47,10 +47,10 @@ class Todo extends Component {
   };
   render() {
     return (
-      <Aux>
-        <div>Sidebar</div>
+      <div className={classes.Content}>
+        <Sidebar />
         <Notes notes={this.state.notes} toggleCheck={this.toggleCheckHandler} />
-      </Aux>
+      </div>
     );
   }
 }

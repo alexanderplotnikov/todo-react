@@ -1,0 +1,37 @@
+.Sidebar {
+  padding-top: 1em;
+  padding-left: 3em;
+  background-color: #fafafa;
+  border-right: solid 1px var(--no-priority-color);
+  box-sizing: border-box;
+}
+/*Project list items*/
+.Sidebar ul {
+  overflow: scroll;
+  scrollbar-width: none;
+  max-height: 30em;
+  padding: 1em 0;
+}
+.Sidebar ul::-webkit-scrollbar {
+  display: none;
+}
+.Sidebar ul li {
+  margin: 2em 0;
+  cursor: pointer;
+}
+
+/*Add project button*/
+.Sidebar div {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding-top: 1em;
+  border-top: solid 1px var(--no-priority-color);
+  box-sizing: border-box;
+}
+.Sidebar div:hover {
+  color: #dc4c3f;
+}
+.Sidebar input {
+  width: 80%;
+}

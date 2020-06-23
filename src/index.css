@@ -6,6 +6,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
+  height: 100%;
+  /* overflow: hidden; */
 }
 
 code {
@@ -14,7 +16,7 @@ code {
 }
 
 :root {
-  --header-height: 100px;
+  --toolbar-height: 70px;
   --border-radius: 0.35em;
   --no-priority-color: #b6b5b5;
   --high-priority-color: red;

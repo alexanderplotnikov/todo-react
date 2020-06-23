@@ -1,5 +1,6 @@
 import React from 'react';
 import Note from './Note/Note';
+import classes from './Notes.module.css';
 
 const notes = (props) => {
   let notes = Object.keys(props.notes).map((nKey) => {
@@ -18,19 +19,9 @@ const notes = (props) => {
       });
     });
   });
-  /*
- <Note
-      key={el.project}
-      title={el.title}
-      complete={el.complete}
-      completeClicked={props.toggleCheck}
-    />
- 
- 
- 
- */
+
   return (
-    <div>
+    <div className={classes.Notes}>
       {notes}
       <button>Add Note</button>
     </div>
