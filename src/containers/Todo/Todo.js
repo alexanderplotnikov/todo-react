@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Notes from '../../components/Notes/Notes';
 import classes from './Todo.module.css';
 import Sidebar from '../../components/Sidebar/Sidebar';
+import Modal from '../../components/UI/Modal/Modal';
+
 class Todo extends Component {
   state = {
     notes: {
@@ -34,6 +36,7 @@ class Todo extends Component {
     projects: {
       title: 'School',
     },
+    adding: true,
   };
   toggleCheckHandler = (proj, note) => {
     const updatedNote = {
@@ -45,9 +48,16 @@ class Todo extends Component {
       notes: updatedNote,
     });
   };
+  addingCancelHandler = () => {
+    this.setState({ adding: false });
+  };
   render() {
     return (
       <div className={classes.Content}>
+        <Modal
+          show={this.state.adding}
+          modalClosed={this.addingCancelHandler}
+        ></Modal>
         <Sidebar />
         <Notes notes={this.state.notes} toggleCheck={this.toggleCheckHandler} />
       </div>
