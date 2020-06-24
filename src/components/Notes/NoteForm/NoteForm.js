@@ -1,51 +1,39 @@
-import React from 'react';
+import React, { Component } from 'react';
+import classes from './NoteForm.module.css';
+import FormButton from './FormButton/FormButton';
+import FormSelect from './FormSelect/FormSelect';
+import FormInput from './FormInput/FormInput';
 
-const NoteForm = (props) => (
-  <form className="addNoteForm ">
-    <div className="row">
-      <div className="input-field">
-        <input name="titleNote" id="titleNote" type="text" />
-        <label htmlFor="titleNote">Title</label>
-      </div>
-    </div>
-    <div className="row">
-      <div className="input-field">
-        <input type="text" name="dueDate" id="dueDate" className="datepicker" />
-        <label htmlFor="bdate">Due Date</label>
-      </div>
-    </div>
-    <div className="row">
-      <div className="input-field">
-        <input name="descNote" id="descNote" type="text" />
-        <label htmlFor="descNote">Comment</label>
-      </div>
-    </div>
-    <div className="addProjDrop row">
-      <div className="input-field browser-default">
-        <select className="browser-default priorityDrop" id="priority">
-          <option value="" disabled selected>
-            Priority
-          </option>
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-        </select>
-      </div>
-      <div className="input-field browser-default">
-        <select className="browser-default projSelectDrop" id="projId">
-          <option value="" disabled selected>
-            Project
-          </option>
-          {/*Automated in js*/}
-        </select>
-      </div>
-    </div>
-    <div className="row addTaskButtons">
-      <a className="waves-effect waves-light btn addTaskBtn ">Add Task</a>
-      <a className="waves-effect waves-light btn editTaskBtn hide">Save</a>
-      <a className="waves-effect waves-light btn cancelTaskBtn ">Cancel</a>
-    </div>
-  </form>
-);
+class Form extends Component {
+  state = {};
 
-export default NoteForm;
+  render() {
+    const note = { ...this.props.prefill };
+    console.log(note.project);
+    const selectPriorityOptions = ['Priority', 'low', 'medium', 'high'];
+    const selectProjectOptions = ['Project', 'Hw', 'Math', 'Eng'];
+
+    return (
+      <form className={classes.NoteForm}>
+        <FormInput type={note.title} inputFor={'Title'} />
+        <FormInput
+          type={note.dueDate}
+          applyClass={'datepicker'}
+          inputFor={'Due Date'}
+        />
+        <FormInput type={note.description} inputFor={'Comment'} />
+        <div className={[classes.AddProjDrop, 'row'].join(' ')}>
+          <FormSelect type={note.project} options={selectProjectOptions} />
+          <FormSelect type={note.priority} options={selectPriorityOptions} />
+        </div>
+        <div className="row addTaskButtons">
+          <FormButton clicked={this.props.addNoteClicked}>Add Task</FormButton>
+          <FormButton clicked={this.props.saveNoteClicked}>Save</FormButton>
+          <FormButton>Cancel</FormButton>
+        </div>
+      </form>
+    );
+  }
+}
+
+export default Form;

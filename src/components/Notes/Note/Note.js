@@ -9,13 +9,16 @@ const note = (props) => {
   return (
     <div className={wrapperClasses.join(' ')}>
       <span onClick={() => props.completeClicked(props.project, props.id)}>
-        {props.complete ? (
-          <i className="material-icons hide">check_circle</i>
-        ) : null}
+        {props.complete ? <i className="material-icons">check_circle</i> : null}
       </span>
       <p>{props.title}</p>
       <div>
-        <i className={editNote.join(' ')}>edit</i>
+        <i
+          onClick={() => props.editClicked(props.project, props.id)}
+          className={editNote.join(' ')}
+        >
+          edit
+        </i>
         <i
           onClick={() => props.deleteClicked(props.project, props.id)}
           className={deleteNote.join(' ')}

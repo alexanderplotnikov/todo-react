@@ -14,6 +14,7 @@ const notes = (props) => {
             complete={note.complete}
             completeClicked={props.toggleCheck}
             deleteClicked={props.deleteNoteClicked}
+            editClicked={props.editNoteClicked}
             project={nKey}
             id={i}
           />

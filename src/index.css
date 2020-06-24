@@ -24,3 +24,15 @@ code {
   --low-priority-color: green;
   --main-margin-left: 2em;
 }
+
+/* Work around for Materialize css datepicker modal */
+.modal-overlay {
+  background-color: transparent;
+  width: 2500px;
+  height: 2500px;
+  margin-left: -1000px;
+  margin-top: -1000px;
+}
+.modal {
+  width: 90%;
+}

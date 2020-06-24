@@ -12,15 +12,17 @@ class Todo extends Component {
           title: 'Math h/w',
           description: 'Ch 2. Ex: 3,5,7',
           dueDate: '2020/06/15',
-          complete: false,
-          project: 'School',
+          complete: true,
+          priority: 'medium',
+          project: 'Math',
         },
         {
           title: 'Engl h/w',
           description: 'Ch 2. Ex: 3,5,7',
           dueDate: '2020/06/15',
           complete: false,
-          project: 'School',
+          priority: 'medium',
+          project: 'Hw',
         },
       ],
       1: [
@@ -29,7 +31,8 @@ class Todo extends Component {
           description: 'Ch 2. Ex: 3,5,7',
           dueDate: '2020/06/15',
           complete: true,
-          project: 'School',
+          priority: 'low',
+          project: 'Eng',
         },
       ],
     },
@@ -37,6 +40,15 @@ class Todo extends Component {
       title: 'School',
     },
     adding: false,
+    editing: false,
+    prefill: {
+      title: '',
+      description: '',
+      dueDate: '',
+      complete: false,
+      priority: 'high',
+      project: '',
+    },
   };
   toggleCheckHandler = (proj, note) => {
     const updatedNote = {
@@ -49,7 +61,7 @@ class Todo extends Component {
     });
   };
   addingCancelHandler = () => {
-    this.setState({ adding: false });
+    this.setState({ adding: false, editing: false });
   };
   addingHandler = () => {
     this.setState({ adding: true });
@@ -61,16 +73,55 @@ class Todo extends Component {
     updatedNote[proj].splice(index, 1);
     this.setState({ notes: updatedNote });
   };
+  editNoteHandler = (proj, index) => {
+    const notePrefill = {
+      ...this.state.notes[proj][index],
+    };
+    this.setState({ editing: true, prefill: notePrefill });
+    console.log(this.state.prefill);
+  };
+  addNoteHandler = (event) => {
+    alert('add note');
+    event.preventDefault();
+  };
+  getPrefill() {
+    if (this.state.editing) {
+      return this.state.prefill;
+    } else {
+      return {
+        title: '',
+        description: '',
+        dueDate: '',
+        complete: false,
+        priority: '',
+        project: '',
+      };
+    }
+  }
+  saveNoteHandler = (event) => {
+    alert('save clicked');
+
+    this.addingCancelHandler();
+    event.preventDefault();
+  };
   render() {
     return (
       <div className={classes.Content}>
-        <Modal show={this.state.adding} modalClosed={this.addingCancelHandler}>
-          <NoteForm />
+        <Modal
+          show={this.state.adding || this.state.editing}
+          modalClosed={this.addingCancelHandler}
+        >
+          <NoteForm
+            prefill={this.getPrefill()}
+            addNoteClicked={this.addNoteHandler}
+            saveNoteClicked={this.saveNoteHandler}
+          />
         </Modal>
         <Sidebar />
         <Notes
           addNoteClicked={this.addingHandler}
           deleteNoteClicked={this.deleteNoteHandler}
+          editNoteClicked={this.editNoteHandler}
           notes={this.state.notes}
           toggleCheck={this.toggleCheckHandler}
         />
