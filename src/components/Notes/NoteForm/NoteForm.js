@@ -5,23 +5,93 @@ import FormSelect from './FormSelect/FormSelect';
 import FormInput from './FormInput/FormInput';
 
 class Form extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.newObj = {};
+    this.transformed = (() => {
+      Object.keys(this.props.prefill).map((name) => {
+        return (this.newObj[name] = { value: this.props.prefill[name] });
+      });
+    })();
+  }
 
+  state = {
+    prefill: {
+      title: '',
+      description: '',
+      dueDate: '',
+      complete: false,
+      priority: 'high',
+      project: '',
+    },
+    formControls: {
+      title: {
+        value: '',
+      },
+      description: {
+        value: '',
+      },
+      dueDate: {
+        value: '',
+      },
+      complete: {
+        value: '',
+      },
+      priority: {
+        value: '',
+      },
+      project: {
+        value: '',
+      },
+    },
+    newFormControls: { ...this.props.prefill },
+  };
+
+  changeHandler = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    console.log('NAME ' + name);
+    console.log('VALUE ' + value);
+
+    this.setState({
+      formControls: {
+        ...this.state.formControls,
+        [name]: {
+          ...this.state.formControls[name],
+          value,
+        },
+      },
+    });
+  };
   render() {
     const note = { ...this.props.prefill };
-    console.log(note.project);
+    console.log(this.state.newFormControls);
+    console.log(this.newObj);
+
     const selectPriorityOptions = ['Priority', 'low', 'medium', 'high'];
     const selectProjectOptions = ['Project', 'Hw', 'Math', 'Eng'];
 
     return (
       <form className={classes.NoteForm}>
-        <FormInput type={note.title} inputFor={'Title'} />
         <FormInput
-          type={note.dueDate}
+          name="title"
+          value={this.state.formControls.title.value}
+          changed={this.changeHandler}
+          inputFor={'Title'}
+        />
+        <FormInput
+          name="dueDate"
+          value={this.state.formControls.dueDate.value}
+          changed={this.changeHandler}
           applyClass={'datepicker'}
           inputFor={'Due Date'}
         />
-        <FormInput type={note.description} inputFor={'Comment'} />
+        <FormInput
+          name="description"
+          value={this.state.formControls.description.value}
+          inputFor={'Comment'}
+          changed={this.changeHandler}
+        />
         <div className={[classes.AddProjDrop, 'row'].join(' ')}>
           <FormSelect type={note.project} options={selectProjectOptions} />
           <FormSelect type={note.priority} options={selectPriorityOptions} />

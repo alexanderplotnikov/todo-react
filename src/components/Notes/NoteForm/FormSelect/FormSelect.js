@@ -2,17 +2,14 @@ import React, { Component } from 'react';
 import FormOptions from './FormOptions';
 
 class FormSelect extends Component {
-  constructor(props) {
-    super(props);
-    this.changeHandler = this.changeHandler.bind(this);
-  }
   state = {
-    value: this.props.type,
+    value: { ...this.props.type },
   };
-  changeHandler(event) {
+
+  changeHandler = (event) => {
     this.setState({ value: event.target.value });
     alert('hey');
-  }
+  };
   render() {
     const options = [...this.props.options];
 
@@ -20,8 +17,7 @@ class FormSelect extends Component {
       <div className="input-field browser-default">
         <select
           className="browser-default priorityDrop"
-          value={this.props.type}
-          defaultValue={this.props.type}
+          // defaultValue={this.props.type}
           onChange={this.changeHandler}
         >
           {options.map((option, i) => {

@@ -3,7 +3,11 @@ import Notes from '../../components/Notes/Notes';
 import classes from './Todo.module.css';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import Modal from '../../components/UI/Modal/Modal';
-import NoteForm from '../../components/Notes/NoteForm/NoteForm';
+//import NoteForm from '../../components/Notes/NoteForm/NoteForm';
+
+// Temporary FormData for testing purposes
+import FormData from '../../components/Notes/NoteForm/FormData';
+
 class Todo extends Component {
   state = {
     notes: {
@@ -25,7 +29,7 @@ class Todo extends Component {
           project: 'Hw',
         },
       ],
-      1: [
+      work: [
         {
           title: 'Eng h/w',
           description: 'Ch 2. Ex: 3,5,7',
@@ -78,15 +82,33 @@ class Todo extends Component {
       ...this.state.notes[proj][index],
     };
     this.setState({ editing: true, prefill: notePrefill });
-    console.log(this.state.prefill);
   };
-  addNoteHandler = (event) => {
-    alert('add note');
+  addNoteHandler = (event, note) => {
+    let newNote = {};
+    Object.keys(note).map((name) => {
+      let { value } = note[name];
+      return (newNote[name] = value);
+    });
+    const proj = newNote.project;
+    const updatedNotes = { ...this.state.notes };
+    let notesArr = [];
+    if (updatedNotes[proj]) {
+      notesArr = [...updatedNotes[proj]];
+    }
+    notesArr.push(newNote);
+    this.setState({
+      notes: {
+        ...this.state.notes,
+        [proj]: notesArr,
+      },
+    });
+
+    this.addingCancelHandler();
     event.preventDefault();
   };
   getPrefill() {
     if (this.state.editing) {
-      return this.state.prefill;
+      return { ...this.state.prefill };
     } else {
       return {
         title: '',
@@ -104,17 +126,31 @@ class Todo extends Component {
     this.addingCancelHandler();
     event.preventDefault();
   };
+  cancelNoteHandler = (event) => {
+    this.addingCancelHandler();
+    event.preventDefault();
+  };
   render() {
+    // const prefill = this.getPrefill();
+    // console.log(this.state.notes);
     return (
       <div className={classes.Content}>
         <Modal
           show={this.state.adding || this.state.editing}
           modalClosed={this.addingCancelHandler}
         >
-          <NoteForm
-            prefill={this.getPrefill()}
+          {/* <NoteForm
+            prefill={prefill}
             addNoteClicked={this.addNoteHandler}
             saveNoteClicked={this.saveNoteHandler}
+          /> */}
+          <FormData
+            addNoteClicked={this.addNoteHandler}
+            saveNoteClicked={this.saveNoteHandler}
+            cancelNoteClicked={this.addingCancelHandler}
+            isAdding={this.state.adding}
+            defaultVal={'low'}
+            prefill={this.getPrefill()}
           />
         </Modal>
         <Sidebar />
