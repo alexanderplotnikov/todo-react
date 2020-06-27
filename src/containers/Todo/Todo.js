@@ -3,40 +3,19 @@ import Notes from '../../components/Notes/Notes';
 import classes from './Todo.module.css';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import Modal from '../../components/UI/Modal/Modal';
-//import NoteForm from '../../components/Notes/NoteForm/NoteForm';
-
-// Temporary FormData for testing purposes
-import FormData from '../../components/Notes/NoteForm/FormData';
+import NoteForm from '../../components/Notes/NoteForm/NoteForm';
 
 class Todo extends Component {
   state = {
     notes: {
-      school: [
+      default: [
         {
-          title: 'Math h/w',
-          description: 'Ch 2. Ex: 3,5,7',
-          dueDate: '2020/06/15',
-          complete: true,
-          priority: 'medium',
-          project: 'Math',
-        },
-        {
-          title: 'Engl h/w',
-          description: 'Ch 2. Ex: 3,5,7',
-          dueDate: '2020/06/15',
+          title: 'Click AddNote below and then delete me',
+          description: 'Simple Todo app',
+          dueDate: '2021/06/15',
           complete: false,
-          priority: 'medium',
-          project: 'Hw',
-        },
-      ],
-      work: [
-        {
-          title: 'Eng h/w',
-          description: 'Ch 2. Ex: 3,5,7',
-          dueDate: '2020/06/15',
-          complete: true,
           priority: 'low',
-          project: 'Eng',
+          project: 'default',
         },
       ],
     },
@@ -52,7 +31,10 @@ class Todo extends Component {
       complete: false,
       priority: 'high',
       project: '',
+      index: null,
     },
+    projectIndex: null,
+    noteIndex: null,
   };
   toggleCheckHandler = (proj, note) => {
     const updatedNote = {
@@ -81,7 +63,12 @@ class Todo extends Component {
     const notePrefill = {
       ...this.state.notes[proj][index],
     };
-    this.setState({ editing: true, prefill: notePrefill });
+    this.setState({
+      editing: true,
+      prefill: notePrefill,
+      projectIndex: proj,
+      noteIndex: index,
+    });
   };
   addNoteHandler = (event, note) => {
     let newNote = {};
@@ -120,9 +107,12 @@ class Todo extends Component {
       };
     }
   }
-  saveNoteHandler = (event) => {
-    alert('save clicked');
-
+  saveNoteHandler = (event, note, projIndex, noteIndex) => {
+    const updatedNote = {
+      ...this.state.notes,
+    };
+    updatedNote[projIndex][noteIndex] = note;
+    this.setState({ notes: updatedNote });
     this.addingCancelHandler();
     event.preventDefault();
   };
@@ -131,8 +121,6 @@ class Todo extends Component {
     event.preventDefault();
   };
   render() {
-    // const prefill = this.getPrefill();
-    // console.log(this.state.notes);
     return (
       <div className={classes.Content}>
         <Modal
@@ -144,13 +132,14 @@ class Todo extends Component {
             addNoteClicked={this.addNoteHandler}
             saveNoteClicked={this.saveNoteHandler}
           /> */}
-          <FormData
+          <NoteForm
             addNoteClicked={this.addNoteHandler}
             saveNoteClicked={this.saveNoteHandler}
             cancelNoteClicked={this.addingCancelHandler}
             isAdding={this.state.adding}
-            defaultVal={'low'}
             prefill={this.getPrefill()}
+            projIndex={this.state.projectIndex}
+            noteIndex={this.state.noteIndex}
           />
         </Modal>
         <Sidebar />
