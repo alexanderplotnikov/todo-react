@@ -18,16 +18,7 @@ class Todo extends Component {
           project: 'school',
         },
       ],
-      work: [
-        {
-          title: 'book2',
-          description: 'Simple Todo app',
-          dueDate: '2021/06/15',
-          complete: false,
-          priority: 'high',
-          project: 'work',
-        },
-      ],
+      work: [],
     },
     projects: {
       title: 'School',

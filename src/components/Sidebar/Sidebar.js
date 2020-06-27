@@ -6,9 +6,10 @@ const sidebar = (props) => (
   <div className={classes.Sidebar}>
     <ul>
       <li>School</li>
+      <li>Work</li>
     </ul>
-    <Button btnType="add">Add project</Button>
-    <input type="text" />
+    {/* <Button btnType="add">Add project</Button>
+    <input type="text" /> */}
   </div>
 );
 

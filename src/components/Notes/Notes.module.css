@@ -8,3 +8,7 @@
   max-height: 80%;
   overflow: scroll;
 }
+
+.Notes > button:nth-child(2) {
+  margin-left: 2em;
+}

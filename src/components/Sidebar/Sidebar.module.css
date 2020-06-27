@@ -4,13 +4,13 @@
   background-color: #fafafa;
   border-right: solid 1px var(--no-priority-color);
   box-sizing: border-box;
+  width: 200px;
 }
 /*Project list items*/
 .Sidebar ul {
   overflow: scroll;
   scrollbar-width: none;
   max-height: 30em;
-  padding: 1em 0;
   border-bottom: solid 1px var(--no-priority-color);
   margin-bottom: 1em;
 }
@@ -18,8 +18,7 @@
   display: none;
 }
 .Sidebar ul li {
-  margin: 2em 0;
-  cursor: pointer;
+  margin: 1em 0;
 }
 
 /*Add project button*/
