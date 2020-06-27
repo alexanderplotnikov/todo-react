@@ -4,15 +4,16 @@ const formInput = (props) => (
   <div className="row">
     <div className="input-field">
       <input
-        name={props.name}
-        className={props.applyClass}
-        id={props.inputFor}
         value={props.value}
-        type="text"
         onChange={props.changed}
+        onBlur={props.blurChanged}
+        name={props.name}
+        id={props.name}
+        type="text"
+        className={props.applyClass}
       />
 
-      <label htmlFor={props.inputFor}>{props.inputFor}</label>
+      <label htmlFor={props.name}>{props.name}</label>
     </div>
   </div>
 );

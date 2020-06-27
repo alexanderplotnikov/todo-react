@@ -1,47 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import FormOptions from './FormOptions';
 
-class FormSelect extends Component {
-  state = {
-    value: { ...this.props.type },
-  };
+const formSelect = (props) => {
+  const options = [...props.options];
+  return (
+    <div className="input-field browser-default">
+      <select
+        className="browser-default priorityDrop"
+        onChange={props.changed}
+        value={props.value}
+        name={props.id}
+        id={props.id}
+      >
+        {options.map((option, i) => {
+          return <FormOptions key={i} value={option} />;
+        })}
+      </select>
+    </div>
+  );
+};
 
-  changeHandler = (event) => {
-    this.setState({ value: event.target.value });
-    alert('hey');
-  };
-  render() {
-    const options = [...this.props.options];
-
-    return (
-      <div className="input-field browser-default">
-        <select
-          className="browser-default priorityDrop"
-          // defaultValue={this.props.type}
-          onChange={this.changeHandler}
-        >
-          {options.map((option, i) => {
-            return <FormOptions key={i} value={option} />;
-          })}
-        </select>
-      </div>
-    );
-  }
-}
-// const formSelect = (this.props) => {
-//   const options = [...this.props.options];
-//   return (
-//     <div className="input-field browser-default">
-//       <select
-//         className="browser-default priorityDrop"
-//         defaultValue={this.props.type}
-//       >
-//         {options.map((option, i) => {
-//           return <FormOptions key={i} value={option} />;
-//         })}
-//       </select>
-//     </div>
-//   );
-// };
-
-export default FormSelect;
+export default formSelect;

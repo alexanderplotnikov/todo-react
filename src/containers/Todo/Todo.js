@@ -8,14 +8,24 @@ import NoteForm from '../../components/Notes/NoteForm/NoteForm';
 class Todo extends Component {
   state = {
     notes: {
-      default: [
+      school: [
         {
           title: 'Click AddNote below and then delete me',
           description: 'Simple Todo app',
           dueDate: '2021/06/15',
           complete: false,
           priority: 'low',
-          project: 'default',
+          project: 'school',
+        },
+      ],
+      work: [
+        {
+          title: 'book2',
+          description: 'Simple Todo app',
+          dueDate: '2021/06/15',
+          complete: false,
+          priority: 'high',
+          project: 'work',
         },
       ],
     },
@@ -29,7 +39,7 @@ class Todo extends Component {
       description: '',
       dueDate: '',
       complete: false,
-      priority: 'high',
+      priority: '',
       project: '',
       index: null,
     },
@@ -127,11 +137,6 @@ class Todo extends Component {
           show={this.state.adding || this.state.editing}
           modalClosed={this.addingCancelHandler}
         >
-          {/* <NoteForm
-            prefill={prefill}
-            addNoteClicked={this.addNoteHandler}
-            saveNoteClicked={this.saveNoteHandler}
-          /> */}
           <NoteForm
             addNoteClicked={this.addNoteHandler}
             saveNoteClicked={this.saveNoteHandler}

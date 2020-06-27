@@ -4,7 +4,9 @@ import Button from '../UI/Button/Button';
 
 const sidebar = (props) => (
   <div className={classes.Sidebar}>
-    <ul>List Projects</ul>
+    <ul>
+      <li>School</li>
+    </ul>
     <Button btnType="add">Add project</Button>
     <input type="text" />
   </div>

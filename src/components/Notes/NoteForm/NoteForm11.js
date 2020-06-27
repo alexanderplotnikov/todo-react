@@ -61,6 +61,8 @@ class Form extends Component {
     });
   };
   render() {
+    const selectProjectOptions = ['one'];
+    const selectPriorityOptions = ['two'];
     const note = { ...this.props.prefill };
     return (
       <form className={classes.NoteForm}>

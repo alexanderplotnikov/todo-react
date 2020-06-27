@@ -1,7 +1,10 @@
 import React from 'react';
 import classes from './NoteForm.module.css';
+import FormInput from './FormInput/FormInput';
+import FormSelect from './FormSelect/FormSelect';
+import FormButton from './FormButton/FormButton';
 
-class FormData extends React.Component {
+class NoteForm extends React.Component {
   state = {
     formControls: {
       title: {
@@ -66,8 +69,10 @@ class FormData extends React.Component {
       value !== null
         ? (newNote[name] = value)
         : (newNote[name] = this.props.prefill[name]);
+      return value;
     });
     this.props.saveNoteClicked(event, newNote, projIndex, noteIndex);
+    this.resetForm(event);
     event.preventDefault();
   };
   resetForm = (event) => {
@@ -90,106 +95,64 @@ class FormData extends React.Component {
       project,
     } = this.state.formControls;
 
+    const priorityOptions = ['Priority', 'low', 'medium', 'high'];
+    const projectOptions = ['Project', 'school', 'work'];
+
     return (
       <form className={classes.NoteForm}>
-        <div className="row">
-          <div className="input-field">
-            <input
-              value={title.value ? null : defaultTitle}
-              onChange={this.changeHandler}
-              name="title"
-              id="titleNote"
-              type="text"
-            />
-            <label forhtml="titleNote">Title</label>
-          </div>
-        </div>
-        <div className="row">
-          <div className="input-field">
-            <input
-              value={dueDate.value ? null : defaultDueDate}
-              onBlur={this.changeDateHandler}
-              type="text"
-              name="dueDate"
-              id="dueDate"
-              className="datepicker"
-            />
-            <label forhtml="bdate">Due Date</label>
-          </div>
-        </div>
-        <div className="row">
-          <div className="input-field">
-            <input
-              value={description.value ? null : defaultDescription}
-              onChange={this.changeHandler}
-              name="description"
-              id="descNote"
-              type="text"
-            />
-            <label forhtml="descNote">Comment</label>
-          </div>
-        </div>
+        <FormInput
+          value={title.value ? null : defaultTitle}
+          changed={this.changeHandler}
+          name="title"
+        />
+        <FormInput
+          value={dueDate.value ? null : defaultDueDate}
+          blurChanged={this.changeDateHandler}
+          name="dueDate"
+          applyClass="datepicker"
+        />
+        <FormInput
+          value={description.value ? null : defaultDescription}
+          changed={this.changeHandler}
+          name="description"
+        />
         <div className={[classes.AddProjDrop, 'row'].join(' ')}>
-          <div className="input-field browser-default">
-            <select
-              value={priority.value ? null : defaultPriority}
-              onBlurCapture={this.changeHandler}
-              className="browser-default priorityDrop"
-              id="priority"
-              name="priority"
-            >
-              <option>Priority</option>
-              <option value="low">Low</option>
-              <option value="medium">Medium</option>
-              <option value="high">High</option>
-            </select>
-          </div>
-          <div className="input-field browser-default">
-            <select
-              className="browser-default projSelectDrop"
-              id="projId"
-              value={project.value ? null : defaultProject}
-              onBlurCapture={this.changeHandler}
-              name="project"
-            >
-              <option>Project</option>
-              <option value="school">School</option>
-              <option value="work">Work</option>
-            </select>
-          </div>
+          <FormSelect
+            options={priorityOptions}
+            value={priority.value ? null : defaultPriority}
+            changed={this.changeHandler}
+            id="priority"
+          />
+          <FormSelect
+            options={projectOptions}
+            value={project.value ? null : defaultProject}
+            changed={this.changeHandler}
+            id="project"
+          />
         </div>
         <div className="row addTaskButtons">
           {this.props.isAdding ? (
-            <button
-              onClick={(event) => {
+            <FormButton
+              clicked={(event) => {
                 this.props.addNoteClicked(
                   event,
                   this.state.formControls,
                   (() => this.resetForm(event))()
                 );
               }}
-              className="waves-effect waves-light btn addTaskBtn"
             >
               Add Task
-            </button>
+            </FormButton>
           ) : (
-            <button
-              onClick={(event) => this.saveNoteHandler(event)}
-              className="waves-effect waves-light btn editTaskBtn"
-            >
+            <FormButton clicked={(event) => this.saveNoteHandler(event)}>
               Save
-            </button>
+            </FormButton>
           )}
-          <button
-            onClick={this.resetForm}
-            className="waves-effect waves-light btn cancelTaskBtn"
-          >
-            Cancel
-          </button>
+          <FormButton clicked={this.resetForm}>Cancel</FormButton>
         </div>
       </form>
     );
   }
 }
 
-export default FormData;
+export default NoteForm;
